@@ -91,6 +91,6 @@ func (r *CompassRegistrator) ConfigureRuntimeAgent(kubeconfig string, runtimeID 
 	return nil
 }
 
-func (r *CompassRegistrator) Register(name string) (string, error) {
+func (r *CompassRegistrator) Register(_ string) (string, error) {
 	return "compass-id", nil
 }

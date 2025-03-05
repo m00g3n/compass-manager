@@ -94,19 +94,7 @@ var _ = AfterSuite(func() {
 	cancelSuiteCtx()
 
 	By("tearing down the test environment")
-	err := (func() (err error) {
-		// Need to sleep if the first stop fails due to a bug:
-		// https://github.com/kubernetes-sigs/controller-runtime/issues/1571
-		sleepTime := 1 * time.Millisecond
-		for i := 0; i < 12; i++ { // Exponentially sleep up to ~4s
-			if err = testEnv.Stop(); err == nil {
-				return
-			}
-			sleepTime *= 2
-			time.Sleep(sleepTime)
-		}
-		return
-	})()
+	err := testEnv.Stop()
 	Expect(err).NotTo(HaveOccurred())
 })
 
